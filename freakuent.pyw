@@ -28,29 +28,40 @@ class Freakuent(QtGui.QMainWindow):
         outputFileDialog = QtGui.QFileDialog(self)
         self.outputFilePath = outputFileDialog.getExistingDirectory(self, "Select Directory for Output File", "/")
         self.ui.outputPathEdit.setText(self.outputFilePath)
+
+#    Write out table into csv file
+    def write_csv(self, text, output):
+        tokens = nltk.word_tokenize(text)
+        fdist = nltk.FreqDist(tokens)
+        csvwriter = csv.writer(output, dialect = 'excel')
+        for i in fdist.items():
+            csvwriter.writerow(i)
+        output.close()
         
     def document_process(self):
         try:
             text = codecs.open(self.ui.inputPathEdit.text(), 'r', encoding = 'utf-8').read()
-        except AttributeError:
+        except IOError:
             QtGui.QMessageBox.about(self, "Error", "Input File Not Found")
-        outputFile = codecs.open(self.outputFilePath + "/" + self.ui.outputFileEdit.text(), 'wb', encoding = 'utf-8')
-        if self.ui.lowerCheck.isChecked():
-            tokens = nltk.word_tokenize(text.lower())
-            fdist = nltk.FreqDist(tokens)
-            csvwriter = csv.writer(outputFile, dialect = 'excel')
-            for i in fdist.items():
-                csvwriter.writerow(i)
+            return
+        self.outputFile = os.path.join(str(self.outputFilePath), 
+                                       str(self.ui.outputFileEdit.text()))
+        if os.path.isfile(self.outputFile):
+            reply = QtGui.QMessageBox.question(self, "Attention", 
+                                               "This action will overwrite existing file!\nAre you sure you want to continue?", 
+                                               QtGui.QMessageBox.Yes, QtGui.QMessageBox.No)
+            if reply == QtGui.QMessageBox.No:
+                return
         else:
-            tokens = nltk.word_tokenize(text)
-            fdist = nltk.FreqDist(tokens)
-            csvwriter = csv.writer(outputFile, dialect = 'excel')
-            for i in fdist.items():
-                csvwriter.writerow(i)
-        outputFile.close()
+            newOutputFile = codecs.open(self.outputFile, 'w', encoding = 'utf-8')
+            if self.ui.lowerCheck.isChecked():
+                self.write_csv(text.lower(), newOutputFile)
+            else:
+                self.write_csv(text, newOutputFile)
         QtGui.QMessageBox.about(self, "Ready", "File Processing Has Been Complete")
-    
-app = QtGui.QApplication(sys.argv)
-window = Freakuent()
-window.show()
-app.exec_()
+
+if __name__ == "__main__":
+    app = QtGui.QApplication(sys.argv)
+    window = Freakuent()
+    window.show()
+    sys.exit(app.exec_())

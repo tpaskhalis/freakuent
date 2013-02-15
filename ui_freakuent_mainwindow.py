@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'freakuent_mainwindow.ui'
 #
-# Created: Thu Feb 14 21:01:57 2013
+# Created: Sat Feb 16 01:58:54 2013
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -57,13 +57,20 @@ class Ui_FreakuentMain(object):
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
         self.languageCombo = QtGui.QComboBox(self.layoutWidget)
+        self.languageCombo.setEditable(True)
         self.languageCombo.setObjectName("languageCombo")
+        self.languageCombo.addItem("")
+        self.languageCombo.addItem("")
+        self.languageCombo.addItem("")
         self.gridLayout.addWidget(self.languageCombo, 1, 1, 1, 2)
         self.label_3 = QtGui.QLabel(self.layoutWidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
         self.encodingCombo = QtGui.QComboBox(self.layoutWidget)
+        self.encodingCombo.setEditable(True)
         self.encodingCombo.setObjectName("encodingCombo")
+        self.encodingCombo.addItem("")
+        self.encodingCombo.addItem("")
         self.gridLayout.addWidget(self.encodingCombo, 2, 1, 1, 2)
         self.layoutWidget1 = QtGui.QWidget(self.centralwidget)
         self.layoutWidget1.setGeometry(QtCore.QRect(10, 370, 381, 143))
@@ -171,14 +178,19 @@ class Ui_FreakuentMain(object):
         QtCore.QMetaObject.connectSlotsByName(FreakuentMain)
 
     def retranslateUi(self, FreakuentMain):
-        FreakuentMain.setWindowTitle(QtGui.QApplication.translate("FreakuentMain", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        FreakuentMain.setWindowTitle(QtGui.QApplication.translate("FreakuentMain", "Freakuent", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("FreakuentMain", "Document", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("FreakuentMain", "Processing", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("FreakuentMain", "Output", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("FreakuentMain", "Path", None, QtGui.QApplication.UnicodeUTF8))
         self.inputDocumentBrowser.setText(QtGui.QApplication.translate("FreakuentMain", "Browse", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("FreakuentMain", "Language", None, QtGui.QApplication.UnicodeUTF8))
+        self.languageCombo.setItemText(0, QtGui.QApplication.translate("FreakuentMain", "English", None, QtGui.QApplication.UnicodeUTF8))
+        self.languageCombo.setItemText(1, QtGui.QApplication.translate("FreakuentMain", "Russian", None, QtGui.QApplication.UnicodeUTF8))
+        self.languageCombo.setItemText(2, QtGui.QApplication.translate("FreakuentMain", "German", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("FreakuentMain", "Encoding", None, QtGui.QApplication.UnicodeUTF8))
+        self.encodingCombo.setItemText(0, QtGui.QApplication.translate("FreakuentMain", "UTF-8", None, QtGui.QApplication.UnicodeUTF8))
+        self.encodingCombo.setItemText(1, QtGui.QApplication.translate("FreakuentMain", "UTF-16", None, QtGui.QApplication.UnicodeUTF8))
         self.outputWordsRadio.setText(QtGui.QApplication.translate("FreakuentMain", "Words", None, QtGui.QApplication.UnicodeUTF8))
         self.outputTagsRadio.setText(QtGui.QApplication.translate("FreakuentMain", "POS tags", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("FreakuentMain", "Path", None, QtGui.QApplication.UnicodeUTF8))
